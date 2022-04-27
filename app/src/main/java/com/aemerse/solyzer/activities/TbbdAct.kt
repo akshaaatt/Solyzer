@@ -78,8 +78,7 @@ class TbbdAct : AppCompatActivity() {
                         i++
                     }
                     val rr = String(gg!![2].toCharArray(), 0, 3)
-                    t1!!.text =
-                        "Installation area \n(Recommended 75%)(sq.ft.)  \n: " + (17.5 * floor(y / 17.5)).toString() + " sq. ft."
+                    t1!!.text = "Installation area \n(Recommended 75%)(sq.ft.)  \n: " + (17.5 * floor(y / 17.5)).toString() + " sq. ft."
                     t2?.text = "Number of Solar Panels  \n: " + floor(y / 17.5).toInt()+ " panels"
                     t3!!.text = "Rating of Solar Plant (kW)  \n: " + ((pp * q) / 1000.0.also { rat = it }).toString() + " kW"
                     finENE = (totalEn * y * 0.092903 * rat) / (2 * 52)

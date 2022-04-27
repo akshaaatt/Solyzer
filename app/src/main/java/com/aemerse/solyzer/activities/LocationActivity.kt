@@ -23,6 +23,7 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback,
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location)
+        supportActionBar?.title = "Solyzer"
         mvc = MapViewController(this)
         val mapFragment: MapFragment = fragmentManager.findFragmentById(R.id.map) as MapFragment
         mapFragment.getMapAsync(this)

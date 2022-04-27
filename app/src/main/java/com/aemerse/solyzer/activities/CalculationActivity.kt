@@ -49,10 +49,8 @@ class CalculationActivity : AppCompatActivity() {
         //String longitude=e2.getText().toString();
         override fun doInBackground(vararg p0: Void?): Void? {
             try {
-                val url1: String =
-                    "https://eosweb.larc.nasa.gov/cgi-bin/sse/grid.cgi?&num=100124&lat="
-                val url2: String =
-                    "&hgt=100&submit=Submit&veg=17&sitelev=&email=skip@larc.nasa.gov&p=grid_id&p=swvdwncook&p=ret_tlt0&step=2&lon="
+                val url1 = "https://eosweb.larc.nasa.gov/cgi-bin/sse/grid.cgi?&num=100124&lat="
+                val url2 = "&hgt=100&submit=Submit&veg=17&sitelev=&email=skip@larc.nasa.gov&p=grid_id&p=swvdwncook&p=ret_tlt0&step=2&lon="
                 val url: String = url1 + lat + url2 + longi
                 val doc: Document = Jsoup.connect(url).get()
                 val table: Element = doc.select("table")[4]
@@ -127,9 +125,6 @@ class CalculationActivity : AppCompatActivity() {
             graph!!.viewport.isScrollable = true
             // graph.getViewport().setScrollableY(true);
             graph!!.isHorizontalScrollBarEnabled = true
-
-            // graph.getViewport().setScalable(true);
-            //  graph.getViewport().setScalableY(true);
         }
     }
 }

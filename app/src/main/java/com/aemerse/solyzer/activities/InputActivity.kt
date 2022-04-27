@@ -17,6 +17,8 @@ class InputActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input)
+        supportActionBar?.title = "Solyzer"
+
         iv = findViewById<View>(R.id.imageView) as ImageView?
         s1 = findViewById<View>(R.id.spinner) as Spinner?
         s2 = findViewById<View>(R.id.spinner2) as Spinner?
