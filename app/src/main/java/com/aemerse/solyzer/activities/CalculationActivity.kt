@@ -1,15 +1,13 @@
 package com.aemerse.solyzer.activities
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.aemerse.solyzer.model.Graph
 import com.aemerse.solyzer.R
+import com.aemerse.solyzer.model.Graph
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.GridLabelRenderer
 import com.jjoe64.graphview.helper.StaticLabelsFormatter
@@ -21,11 +19,7 @@ import org.jsoup.nodes.Element
 
 class CalculationActivity : AppCompatActivity() {
     var graph: GraphView? = null
-    var e1: EditText? = null
-    var e2: EditText? = null
-    var e3: EditText? = null
-    var tv: TextView? = null
-    var b1: Button? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calculation)
@@ -39,14 +33,13 @@ class CalculationActivity : AppCompatActivity() {
         Graph()
     }
 
-    inner class doit internal constructor(var lat: String, var longi: String) :
-        AsyncTask<Void?, Void?, Void?>() {
+    @SuppressLint("StaticFieldLeak")
+    inner class doit internal constructor(var lat: String, var longi: String) : AsyncTask<Void?, Void?, Void?>() {
         var words: String = ""
         var i: Int = 0
         var arr: ArrayList<String> = ArrayList()
 
-        // String latitude=e1.getText().toString();
-        //String longitude=e2.getText().toString();
+        @Deprecated("Deprecated in Java")
         override fun doInBackground(vararg p0: Void?): Void? {
             try {
                 val url1 = "https://eosweb.larc.nasa.gov/cgi-bin/sse/grid.cgi?&num=100124&lat="
@@ -87,7 +80,7 @@ class CalculationActivity : AppCompatActivity() {
             val series: BarGraphSeries<DataPoint?>? = g.generate()
             graph!!.addSeries(series)
             graph!!.viewport.isXAxisBoundsManual = true
-            val staticLabelsFormatter: StaticLabelsFormatter = StaticLabelsFormatter(graph)
+            val staticLabelsFormatter = StaticLabelsFormatter(graph)
             staticLabelsFormatter.setHorizontalLabels(arrayOf("Jan",
                 "Feb",
                 "Mar",

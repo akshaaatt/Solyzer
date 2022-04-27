@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
@@ -26,20 +27,9 @@ import org.jsoup.nodes.Element
 import kotlin.math.floor
 
 class TbbdAct : AppCompatActivity() {
-    /**
-     * The [PagerAdapter] that will provide
-     * fragments for each of the sections. We use a
-     * [FragmentPagerAdapter] derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * [FragmentStatePagerAdapter].
-     */
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
-
-    /**
-     * The [ViewPager] that will host the section contents.
-     */
     private var mViewPager: ViewPager? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dialog = ProgressDialog(this) // this = YourActivity
@@ -70,7 +60,7 @@ class TbbdAct : AppCompatActivity() {
                     t5 = rootView.findViewById<View>(R.id.effi) as TextView
                     val y = gg!![1].toDouble()
                     var rat: Double
-                    var q: Int = 0
+                    val q = 0
                     var pp = 0
                     var i = 1
                     while (i <= 3) {
@@ -217,11 +207,9 @@ class TbbdAct : AppCompatActivity() {
 
         override fun doInBackground(vararg p0: Void?): Void? {
             try {
-                val url1 = "https://eosweb.larc.nasa.gov/cgi-bin/sse/grid.cgi?&num=100124&lat="
-                val url2 =
-                    "&hgt=100&submit=Submit&veg=17&sitelev=&email=skip@larc.nasa.gov&p=swv_dwn&p=exp_dif&p=avg_dnr&p=daylight&p=ret_tlt0&p=TSKIN&step=2&lon="
-                val url = url1 + lat + url2 + longi
+                val url = "https://eosweb.larc.nasa.gov/cgi-bin/sse/grid.cgi?&num=100124&lat=$lat&hgt=100&submit=Submit&veg=17&sitelev=&email=skip@larc.nasa.gov&p=swv_dwn&p=exp_dif&p=avg_dnr&p=daylight&p=ret_tlt0&p=TSKIN&step=2&lon=$longi"
                 val doc = Jsoup.connect(url).get()
+                Log.d("kuchii", doc.toString())
                 var table: Element = doc.select("table")[2]
                 var rows: Element = table.select("tr")[1]
                 for (i in 1..12) energy[i - 1] = rows.child(i).text().toDouble()
@@ -244,16 +232,6 @@ class TbbdAct : AppCompatActivity() {
             super.onPostExecute(aVoid)
             getData(1)
             gg = intent.extras!!.getStringArray("input")
-
-            /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
             setContentView(R.layout.activity_tbbd)
 
             // Create the adapter that will return a fragment for each of the three
@@ -269,17 +247,7 @@ class TbbdAct : AppCompatActivity() {
         }
 
         fun showGraphs() {
-            var gridLabel: GridLabelRenderer
-
-            /*gridLabel = graphEN.getGridLabelRenderer();
-            gridLabel.setHorizontalAxisTitle("Month");
-            gridLabel.setVerticalAxisTitle("Averaged Electricity(kWH/sq.m/Month)");
-            setGraph(graphEN,1);
-
-            gridLabel = graphAN.getGridLabelRenderer();
-            gridLabel.setHorizontalAxisTitle("Month");
-            gridLabel.setVerticalAxisTitle("Opt. Tilt Angle For Panels");
-            setGraph(graphAN,2);*/gridLabel = graphDH!!.gridLabelRenderer
+            var gridLabel: GridLabelRenderer = graphDH!!.gridLabelRenderer
             gridLabel.horizontalAxisTitle = "Month"
             gridLabel.verticalAxisTitle = "Hours of Daylight"
             setGraph(graphDH, 3)
@@ -290,7 +258,6 @@ class TbbdAct : AppCompatActivity() {
         }
 
         fun setGraph(graph: GraphView?, flag: Int) {
-            //graph.setBackgroundColor();
             val series = LineGraphSeries(getData(flag))
             graph!!.addSeries(series)
             val staticLabelsFormatter = StaticLabelsFormatter(graph)
@@ -311,22 +278,20 @@ class TbbdAct : AppCompatActivity() {
             graph.gridLabelRenderer.padding = 40
             graph.setBackgroundColor(Color.rgb(235, 237, 239))
 
-            /*graph.setDrawValuesOnTop(true);
-            series.setValuesOnTopColor(Color.RED);*/series.backgroundColor = Color.rgb(26, 188, 156)
+            series.backgroundColor = Color.rgb(26, 188, 156)
             series.setAnimated(true)
             series.thickness = 15
             series.dataPointsRadius = 10f
             series.isDrawDataPoints = true
-            series.setOnDataPointTapListener(OnDataPointTapListener { series, dataPoint ->
+            series.setOnDataPointTapListener { series, dataPoint ->
                 Toast.makeText(
                     applicationContext, "" + dataPoint, Toast.LENGTH_SHORT).show()
-            })
+            }
             graph.viewport.isXAxisBoundsManual = true
             graph.viewport.isYAxisBoundsManual = true
             graph.viewport.isScalable = true // enables horizontal zooming and scrolling
             graph.viewport.setScalableY(true) // enables vertical zooming and scrolling
 
-            //graph.getViewport().setDrawBorder(true);
             graph.visibility = GraphView.VISIBLE
         }
     }
@@ -335,8 +300,7 @@ class TbbdAct : AppCompatActivity() {
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    inner class SectionsPagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(
-        (fm)!!) {
+    inner class SectionsPagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter((fm)!!) {
         override fun getItem(position: Int): Fragment {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).

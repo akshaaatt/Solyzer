@@ -13,8 +13,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapFragment
 import com.google.android.gms.maps.OnMapReadyCallback
 
-class LocationActivity : AppCompatActivity(), OnMapReadyCallback,
-    View.OnFocusChangeListener {
+class LocationActivity : AppCompatActivity(), OnMapReadyCallback, View.OnFocusChangeListener {
     var next: Button? = null
     var mvc: MapViewController? = null
     var latt: EditText? = null

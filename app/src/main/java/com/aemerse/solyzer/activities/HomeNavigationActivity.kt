@@ -12,21 +12,18 @@ import com.aemerse.solyzer.R
 
 class HomeNavigationActivity : AppCompatActivity(){
     var btnStart: Button? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.app_bar_home_navigation)
         val toolbar: Toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
-        btninit()
-        initGrid()
-    }
-
-    private fun btninit() {
         btnStart = findViewById<View>(R.id.btnStart) as Button?
         btnStart!!.setOnClickListener {
             startActivity(Intent(applicationContext, LocationActivity::class.java))
         }
+        initGrid()
     }
 
     private fun initGrid() {

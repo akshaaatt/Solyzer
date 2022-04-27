@@ -31,8 +31,7 @@ class InputActivity : AppCompatActivity() {
         sub.add("(280-320W)")
         sub.add("(320-350W)")
         sub.add("(350-380W)")
-        var adp: ArrayAdapter<String?>? =
-            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, sub)
+        var adp: ArrayAdapter<String?>? = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, sub)
         s1!!.adapter = adp
         sub = ArrayList()
         sub.add("Residential")
@@ -59,9 +58,7 @@ class InputActivity : AppCompatActivity() {
                 var flag = true
                 for (i in 0..4) if (s[i]!!.compareTo("") == 0) flag = false
                 if (!flag) {
-                    Toast.makeText(applicationContext,
-                        "Details Incomplete.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Details Incomplete.", Toast.LENGTH_SHORT).show()
                     return
                 }
                 val i = Intent(applicationContext, TbbdAct::class.java)

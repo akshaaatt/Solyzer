@@ -35,7 +35,6 @@
 
         <activity android:name=".activities.LocationActivity" />
 
-        <activity android:name=".activities.ReadingActivity" />
         <activity android:name=".activities.MainActivity" />
     </application>
 
