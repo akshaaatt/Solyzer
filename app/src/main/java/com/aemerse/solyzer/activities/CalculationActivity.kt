@@ -70,7 +70,7 @@ class CalculationActivity : AppCompatActivity() {
 
         override fun onPostExecute(aVoid: Void?) {
             super.onPostExecute(aVoid)
-            val g: Graph = Graph()
+            val g = Graph()
             g.setText(words)
 
             //arr.remove(i);

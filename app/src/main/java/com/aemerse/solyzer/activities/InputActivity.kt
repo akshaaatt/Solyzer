@@ -25,6 +25,7 @@ class InputActivity : AppCompatActivity() {
         e1 = findViewById<View>(R.id.editText) as EditText?
         e2 = findViewById<View>(R.id.editText3) as EditText?
         e3 = findViewById<View>(R.id.editText4) as EditText?
+
         var sub: ArrayList<String?> = ArrayList()
         sub.add("(220-250W)")
         sub.add("(250-280W)")
@@ -42,21 +43,20 @@ class InputActivity : AppCompatActivity() {
         adp = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, sub)
         s2!!.adapter = adp
         val b: Bundle? = intent.extras
+
+
         iv!!.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 val s: Array<String?> = arrayOfNulls(5)
-                s[0] = ""
-                s[1] = ""
-                s[2] = ""
-                s[3] = ""
-                s[4] = ""
                 s[0] = e1!!.text.toString()
                 s[1] = e2!!.text.toString()
                 s[2] = s1!!.selectedItem.toString()
                 s[3] = s1!!.selectedItem.toString()
                 s[4] = e3!!.text.toString()
                 var flag = true
-                for (i in 0..4) if (s[i]!!.compareTo("") == 0) flag = false
+                for (i in 0..4) when {
+                    s[i]!!.compareTo("") == 0 -> flag = false
+                }
                 if (!flag) {
                     Toast.makeText(applicationContext, "Details Incomplete.", Toast.LENGTH_SHORT).show()
                     return

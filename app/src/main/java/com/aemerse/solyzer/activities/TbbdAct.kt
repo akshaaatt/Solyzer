@@ -329,14 +329,10 @@ class TbbdAct : AppCompatActivity() {
         var t3: TextView? = null
         var t4: TextView? = null
         var t5: TextView? = null
-        var graphEN: GraphView? = null
-        var graphAN: GraphView? = null
         var graphDH: GraphView? = null
         var graphTP: GraphView? = null
         var chart: BarChart? = null
         var chart2: LineChart? = null
-        var chart3: LineChart? = null
-        var chart4: LineChart? = null
         var lat: String? = null
         var lng: String? = null
         var gg: Array<String>? = null
